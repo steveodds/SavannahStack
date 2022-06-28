@@ -1,6 +1,6 @@
 ﻿namespace SavannahStack
 {
-    public class Class1
+    public class Stack_S
     {
         public void Push(string element)
         {
