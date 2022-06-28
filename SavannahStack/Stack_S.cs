@@ -4,7 +4,7 @@
     {
         static readonly int MAX_STACK_SIZE = 1000;
         private int top;
-        private int[] stack = new int[MAX_STACK_SIZE];
+        private string[] stack = new string[MAX_STACK_SIZE];
 
         public Stack_S()
         {
@@ -18,7 +18,11 @@
 
         public void Push(string element)
         {
+            if (top >= MAX_STACK_SIZE)
+                throw new InvalidOperationException($"Failed to add element {element}. The stack is full.");
 
+            stack[top] = element;
+            top++;
         }
 
         // For multiple items
