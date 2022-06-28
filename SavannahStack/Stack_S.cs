@@ -21,7 +21,7 @@
 
         public int GetTotalCount()
         {
-            return top;
+            return top + 1;
         }
 
         public void Clear()
