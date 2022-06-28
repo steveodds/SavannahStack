@@ -11,6 +11,9 @@
             top = -1;
         }
 
+        /////////////////
+        // Helper methods
+
         public bool IsEmpty()
         {
             return top < 0;
@@ -20,6 +23,22 @@
         {
             return top;
         }
+
+        public void Clear()
+        {
+            if (top != -1)
+            {
+                top = -1;
+                stack = new string[MAX_STACK_SIZE];
+            }
+        }
+
+        public bool Contains(string element)
+        {
+            return stack.Contains(element);
+        }
+
+        /////////////////
 
         public void Push(string element)
         {
@@ -55,7 +74,7 @@
         {
             if (top < 0)
                 throw new InvalidOperationException("Cannot peek an empty stack.");
-            
+
             return stack[top];
         }
     }
