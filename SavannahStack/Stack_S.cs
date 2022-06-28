@@ -27,6 +27,14 @@
         // For multiple items
         public void Push(string[] elements)
         {
+            int availableStackSpace = MAX_STACK_SIZE - top;
+            if (availableStackSpace < elements.Length)
+                throw new InvalidOperationException("Failed to add elements. The stack does not have enough space.");
+
+            foreach (var element in elements)
+            {
+                Push(element);
+            }
 
         }
 
