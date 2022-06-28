@@ -21,8 +21,7 @@
             if (top >= MAX_STACK_SIZE)
                 throw new InvalidOperationException($"Failed to add element {element}. The stack is full.");
 
-            stack[top] = element;
-            top++;
+            stack[++top] = element;
         }
 
         // For multiple items
@@ -33,7 +32,10 @@
 
         public string Pop()
         {
-            throw new NotImplementedException();
+            if (top < 0)
+                throw new InvalidOperationException("Cannot remove element from an empty stack.");
+
+            return stack[top--];
         }
 
         public string Peek()
