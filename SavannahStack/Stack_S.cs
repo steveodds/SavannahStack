@@ -40,6 +40,7 @@
 
         /////////////////
 
+        // Add item to stack
         public void Push(string element)
         {
             if (top >= MAX_STACK_SIZE)
@@ -62,6 +63,7 @@
 
         }
 
+        // Remove and return most recent element
         public string Pop()
         {
             if (top < 0)
@@ -70,6 +72,7 @@
             return stack[top--];
         }
 
+        // Check the top without removing it
         public string Peek()
         {
             if (top < 0)
