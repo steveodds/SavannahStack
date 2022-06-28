@@ -16,6 +16,11 @@
             return top < 0;
         }
 
+        public int GetTotalCount()
+        {
+            return top;
+        }
+
         public void Push(string element)
         {
             if (top >= MAX_STACK_SIZE)
