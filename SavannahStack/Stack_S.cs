@@ -40,7 +40,10 @@
 
         public string Peek()
         {
-            throw new NotImplementedException();
+            if (top < 0)
+                throw new InvalidOperationException("Cannot peek an empty stack.");
+            
+            return stack[top];
         }
     }
 }
