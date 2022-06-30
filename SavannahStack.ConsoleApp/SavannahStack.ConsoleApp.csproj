@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SavannahStack.Test\SavannahStack.Test.csproj" />
+    <ProjectReference Include="..\SavannahStack\SavannahStack.csproj" />
+  </ItemGroup>
+
 </Project>
