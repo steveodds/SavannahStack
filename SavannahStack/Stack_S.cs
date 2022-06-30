@@ -26,11 +26,11 @@
 
         public void Clear()
         {
-            if (top != -1)
-            {
-                top = -1;
-                stack = new T[MAX_STACK_SIZE];
-            }
+            if (top == -1)
+                throw new InvalidOperationException("Stack is already empty");
+
+            top = -1;
+            stack = new T[MAX_STACK_SIZE];
         }
 
         public bool Contains(T element)
