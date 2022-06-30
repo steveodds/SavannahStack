@@ -117,7 +117,7 @@ namespace SavannahStack.Test
         public void StackAddObjects()
         {
             var stack = new Stack_S<Person>();
-            stack.Push(new Person() { Title= "Mr.", Name = "Stephen Odundo", Age = 26 });
+            stack.Push(new Person() { Title= "Mr.", Name = "Stephen Odundo", Age = "26" });
             var item = stack.Pop();
             Assert.IsInstanceOfType(item, typeof(Person));
         }

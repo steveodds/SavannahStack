@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SavannahStack.Test
 {
-    internal class Person
+    public class Person
     {
         public string Title { get; set; }
         public string Name { get; set; }
-        public int Age { get; set; }
+        public string Age { get; set; }
     }
 }
