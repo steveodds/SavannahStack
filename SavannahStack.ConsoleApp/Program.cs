@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 var showMenu = true;
 
+// Loop through menu until user exits
 while (showMenu)
 {
     showMenu = MainMenu();
@@ -19,7 +20,7 @@ bool MainMenu()
 4. Exit");
 
     var userSelection = Console.ReadKey();
-    var choice = true;
+    var choice = true; // loop through each submenu until user exits
     switch (userSelection.KeyChar)
     {
         case '1':
@@ -46,10 +47,11 @@ bool MainMenu()
         case '4':
             return false;
         default:
-            return true;
+            return true; // wrong options just rerender the menu
     }
 }
 
+// Add items one at a time to stack
 bool AddSingle()
 {
     var userSingleItems = new SavannahStack.Stack_S<string>();
@@ -58,19 +60,20 @@ bool AddSingle()
     {
         Console.WriteLine("Please provide an item to store in the stack:");
         string? item = Console.ReadLine();
-        while (item == null)
+        while (item == null) // make sure user actually provides input
             item = Console.ReadLine();
-        // store
+        // add to stack
         userSingleItems.Push(item);
         Console.WriteLine("Save another item? (Y/N)");
         var restart = Console.ReadKey();
         Console.WriteLine("\n");
-        if (restart.KeyChar.ToString().ToLowerInvariant() == "n")
+        if (restart.KeyChar.ToString().ToLowerInvariant() == "n") // if user doesn't decline, loop through this menu again
             return StackActions(userSingleItems);
     }
     return false;
 }
 
+// Add multiple items at once
 bool AddMultiple()
 {
     var userMultiItems = new SavannahStack.Stack_S<string>();
@@ -81,7 +84,7 @@ bool AddMultiple()
         string? items = Console.ReadLine();
         while (items == null)
             items = Console.ReadLine();
-        // store
+        // split into array then add with overloaded method
         var splitItems = items.Split('\u002C');
         userMultiItems.Push(splitItems);
         return StackActions(userMultiItems);
@@ -89,9 +92,10 @@ bool AddMultiple()
     return false;
 }
 
+// Leveraging generics by adding a non-primitive variable
 bool AddComplex()
 {
-    var userComplexItems = new SavannahStack.Stack_S<SavannahStack.Test.Person>();
+    var userComplexItems = new SavannahStack.Stack_S<SavannahStack.Test.Person>(); // reusing person class in test
     var addComplexActions = true;
     while (addComplexActions)
     {
@@ -114,21 +118,22 @@ bool AddComplex()
         while (age == null)
             age = Console.ReadLine();
         person.Age = age;
-        // store
+        // add to stack
         userComplexItems.Push(person);
         Console.WriteLine("Save another item? (Y/N)");
         var restart = Console.ReadKey();
         Console.WriteLine("\n");
         if (restart.KeyChar.ToString().ToLowerInvariant() == "n")
-            return StackComplexActions(userComplexItems);
+            return StackComplexActions(userComplexItems); // use separate actions method
     }
     return false;
 }
 
+// Actions that make use of the stack helper functions ("extra functionality")
 bool StackActions(SavannahStack.Stack_S<string> items)
 {
     var showActions = true;
-    while (showActions)
+    while (showActions) // loop through until user exits
     {
         Console.WriteLine("Please select an option:");
         Console.WriteLine(
@@ -147,6 +152,7 @@ bool StackActions(SavannahStack.Stack_S<string> items)
                 Console.WriteLine("========================");
                 try
                 {
+                    // info about stack
                     Console.WriteLine($"| Items in stack: {items.GetTotalCount()}");
                     Console.WriteLine($"| Last added item (Peek): {items.Peek()}");
                     Console.WriteLine($"| Is Stack empty?: {items.IsEmpty()}");
@@ -154,6 +160,7 @@ bool StackActions(SavannahStack.Stack_S<string> items)
                 }
                 catch (InvalidOperationException)
                 {
+                    // operations fail if performed on an empty stack
                     Console.WriteLine("| Stack is empty");
                 }
                 Console.WriteLine("========================");
@@ -162,7 +169,7 @@ bool StackActions(SavannahStack.Stack_S<string> items)
             case '2':
                 Console.WriteLine("\n");
                 Console.WriteLine("========================");
-                var totalItems = items.GetTotalCount();
+                var totalItems = items.GetTotalCount(); // prefetch total as it changes with each pop
                 for (int i = 0; i < totalItems; i++)
                 {
                     Console.WriteLine(items.Pop());
@@ -175,6 +182,10 @@ bool StackActions(SavannahStack.Stack_S<string> items)
             case '4':
                 Console.WriteLine("Type the item you want to search for:");
                 var searchItem = Console.ReadLine();
+                while (searchItem != null)
+                    searchItem = Console.ReadLine();
+
+                // throws null warning but the while loop forces input
                 Console.WriteLine("\n");
                 Console.WriteLine("========================");
                 Console.WriteLine(items.Contains(searchItem) ? $"{searchItem} found!" : $"{searchItem} is not in the stack!");
@@ -194,6 +205,7 @@ bool StackActions(SavannahStack.Stack_S<string> items)
                 }
                 catch (InvalidOperationException)
                 {
+                    // in case user tries to clear again
                     Console.WriteLine("Stack is already empty!");
                     Console.WriteLine("========================");
                     Console.WriteLine("\n");
@@ -209,6 +221,7 @@ bool StackActions(SavannahStack.Stack_S<string> items)
     return false;
 }
 
+// same as StackActions but without search
 bool StackComplexActions(SavannahStack.Stack_S<SavannahStack.Test.Person> items)
 {
     var showActions = true;
@@ -232,6 +245,7 @@ bool StackComplexActions(SavannahStack.Stack_S<SavannahStack.Test.Person> items)
                 {
                     Console.WriteLine($"| Items in stack: {items.GetTotalCount()}");
                     var person = items.Peek();
+                    // print object in readable form
                     Console.WriteLine($"| Last added item (Peek): {person.Title} {person.Name} of age {person.Age}");
                     Console.WriteLine($"| Is Stack empty?: {items.IsEmpty()}");
 
