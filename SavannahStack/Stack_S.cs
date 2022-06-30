@@ -1,10 +1,10 @@
 ﻿namespace SavannahStack
 {
-    public class Stack_S
+    public class Stack_S<T>
     {
         static readonly int MAX_STACK_SIZE = 1000;
         private int top;
-        private string[] stack = new string[MAX_STACK_SIZE];
+        private T[] stack = new T[MAX_STACK_SIZE];
 
         public Stack_S()
         {
@@ -29,11 +29,11 @@
             if (top != -1)
             {
                 top = -1;
-                stack = new string[MAX_STACK_SIZE];
+                stack = new T[MAX_STACK_SIZE];
             }
         }
 
-        public bool Contains(string element)
+        public bool Contains(T element)
         {
             return stack.Contains(element);
         }
@@ -41,16 +41,16 @@
         /////////////////
 
         // Add item to stack
-        public void Push(string element)
+        public void Push(T element)
         {
             if (top >= MAX_STACK_SIZE)
-                throw new InvalidOperationException($"Failed to add element {element}. The stack is full.");
+                throw new InvalidOperationException($"Failed to add element. The stack is full.");
 
             stack[++top] = element;
         }
 
         // For multiple items
-        public void Push(string[] elements)
+        public void Push(T[] elements)
         {
             int availableStackSpace = MAX_STACK_SIZE - top;
             if (availableStackSpace < elements.Length)
@@ -64,7 +64,7 @@
         }
 
         // Remove and return most recent element
-        public string Pop()
+        public T Pop()
         {
             if (top < 0)
                 throw new InvalidOperationException("Cannot remove element from an empty stack.");
@@ -73,7 +73,7 @@
         }
 
         // Check the top without removing it
-        public string Peek()
+        public T Peek()
         {
             if (top < 0)
                 throw new InvalidOperationException("Cannot peek an empty stack.");
